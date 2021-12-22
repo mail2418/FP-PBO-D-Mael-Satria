@@ -34,32 +34,34 @@ public class Football extends Thread{
     private boolean kicked;
  
     SoundManager soundManager;
-             
+    public Football() {
+    	
+    }
     public Football(JPanel p,InfoPanel infoPanel,Player player,Goal goal) {
        this.goal = goal;
        this.panel = p;
        this.infoPanel = infoPanel;
-       this.player = player;
+       this.player = player; 
        this.hit = false;
        this.kicked = false;
 
- 
-       Graphics g = panel.getGraphics ();
+       Graphics g = panel.getGraphics();
        g2 = (Graphics2D) g;
        backgroundColor = panel.getBackground ();
 
- 
        this.soundManager = SoundManager.getInstance();	
  
        dimension = panel.getSize(); 
        x = player.getx();
-       y = player.gety() - 10;					
- 
-      	
-       dx = 0;
-       dy = (int) (-10 - (1.5 * infoPanel.getLevel()));//buat gerakin bolanya(kecepatan)
-   
-      this.infoPanel.displayInfo();			
+       y = player.gety() - 10;
+       
+       if(infoPanel.getLevel() > 1) {
+    	   dy = -10 -((int)1 * infoPanel.getLevel());
+       }
+       else
+    	   dy = -10;
+       
+       this.infoPanel.displayInfo();			
     }
   
     public Rectangle2D.Double getBoundingRectangle() {	
@@ -96,10 +98,11 @@ public class Football extends Thread{
        {
           soundManager.playSound("goal", false);
           this.hit = true;
-          this.incrementPoints = (int) (5 + (1.5 * infoPanel.getLevel())); 
+          this.incrementPoints = 6; 
           y = -5;
           infoPanel.incrementPoints(incrementPoints);
           infoPanel.incrementHits();
+//          infoPanel.IncreaseSpeed(goal,2);
           infoPanel.displayInfo();	
       
        }
@@ -109,7 +112,7 @@ public class Football extends Thread{
        {		
          soundManager.playSound("missed", false);	
          infoPanel.incrementMisses();
-         this.decreasePoints = (int) (3 + (1.75 * infoPanel.getLevel()));
+         this.decreasePoints = (int) (4 + (1.75 * infoPanel.getLevel()));
          infoPanel.decreasePoints(decreasePoints);
          infoPanel.displayInfo();	
          kicked = true;
@@ -131,11 +134,12 @@ public class Football extends Thread{
 	
 	     }
      }
-
+     
      public int gety(){
         return this.y;
      }
      public void sety(int y){
         this.y = y;
      }
+     
 }

@@ -8,6 +8,7 @@ public class InfoPanel extends JPanel {
 	private int misses;
 	private int points;
 	private int level;
+	private int tempResizeGoal;
 
 	private JLabel hitsL;
 	private JLabel missesL;
@@ -19,14 +20,11 @@ public class InfoPanel extends JPanel {
 	private JTextField missesTF;
 	private JTextField pointsTF;
 	private JTextField LevelTF;
-
-
-
+	
    	public InfoPanel () {
 
 		setBackground(Color.GRAY);
 
-	
 		hitsL = new JLabel ("# Goals");
 		missesL = new JLabel ("# Misses   ");
 		pointsL = new JLabel ("Points");
@@ -68,21 +66,39 @@ public class InfoPanel extends JPanel {
 	public void incrementHits () {
 		hits++;
 		level++;
+//		goal.DecreaseSize(15);
+//		goal.IncreaseSpeed(5);
 	}
 
 	public void incrementMisses () {
 		misses++;
 		if(level > 1)
 			level--;
+//		goal.IncreaseSize(2);
+//		goal.DecreaseSpeed(5);
 	}
+//	public void IncreaseSize(Goal goal, int increment) {
+//		goal.IncreaseSize(increment);
+//	}
+//	public void DecreaseSpeed(Goal goal, int decrement) {
+//		goal.DecreaseSpeed(decrement);
+//	}
+//	public void DecreaseSize(Goal goal, int decrement) {
+//		goal.DecreaseSize(decrement);
+//	}
+//	public void IncreaseSpeed(Goal goal, int increment) {
+//		goal.IncreaseSpeed(increment);
+//	}
 
 	public void incrementPoints (int numPoints) {
 		points+= numPoints;
 	}
 
 	public void decreasePoints(int points){
-		if((this.points - points)>-1){
-		this.points-= points;}
+		if((this.points - points)>0)
+			this.points-= points;
+		else
+			this.points = 0;
 	}
 
 	public void displayInfo () {

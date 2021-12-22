@@ -108,13 +108,12 @@ public class GameWindow extends JFrame implements KeyListener,ActionListener{
 	public void keyTyped(KeyEvent e) {
 
 	}
-	
 
 	public void actionPerformed(ActionEvent e) {
 
 		String command = e.getActionCommand();
 
-		if (command.equals(createBallB.getText())) {
+		if (command.equals(createBallB.getText()) && !started) {
 			gamePanel.drawGameEntities();
 			gamePanel.startGoal();
 			started = true;
@@ -126,6 +125,4 @@ public class GameWindow extends JFrame implements KeyListener,ActionListener{
 		mainPanel.requestFocus();
 
 	}
-
 }
-      

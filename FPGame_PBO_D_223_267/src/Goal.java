@@ -10,36 +10,34 @@ import javax.swing.JPanel;
 
 public class Goal extends Thread{
 
-   private static final int XSIZE = 100;
-   private static final int YSIZE = 15;
+	private static final int XSIZE = 100;
+	private static final int YSIZE = 10;
 
    private JPanel panel;
    private int x;
    private int y;
    private int dx;
-   private int dy;
    boolean mvright;
 
    Graphics2D g2;
    private Color backgroundColor;
    private Dimension dimension;
-
+   
    public Goal (JPanel p, int xPos, int yPos) {
-      panel = p;
-      backgroundColor = panel.getBackground ();
-      x = xPos;
-      y = yPos;
-      dx = 5;
-      dy = 0;
-      mvright = false;
+      this.panel = p;
+      this.backgroundColor = panel.getBackground();
+      this.x = xPos;
+      this.y = yPos;
+      this.dx = 5;
+      this.mvright = false;
    }
 
    public void draw () {
     Graphics g = panel.getGraphics ();
     g2 = (Graphics2D) g;
-      Rectangle goal = new Rectangle(x, y, XSIZE, YSIZE);
-      g2.setColor(Color.gray);
-      g2.fill(goal);
+    Rectangle goal = new Rectangle(x, y, XSIZE, YSIZE);
+    g.setColor(Color.DARK_GRAY);
+    g2.fill(goal);
    }
 
    public Rectangle2D.Double getBoundingRectangle() {
@@ -52,37 +50,38 @@ public class Goal extends Thread{
       g2.setColor (backgroundColor);
       g2.fill (new Rectangle(x, y, XSIZE, YSIZE));
    }
+   
 
-   public void move () {
+   public void move(){
     
     if (!panel.isVisible ()) return;
 
     dimension = panel.getSize();
 
-    if (((x + dx + XSIZE) < dimension.width) && mvright == false)
-       x+= dx;
+    if (((x + dx + XSIZE) < dimension.width) && !mvright)
+       x += dx;
     if((x + dx + XSIZE) == dimension.width)
        mvright = true;   
     if(((x - dx) > 0) && mvright == true)
-    	x = x - dx;      
-    if((x-dx)==0)
+    	x -= dx;      
+    if((x - dx) == 0)
     	mvright=false;
  }
 
   public void run () {
-  try {
-      draw ();
-      while (true) {			
-          erase();
-          move ();
-          draw();
-          sleep (50);			
-      }
-  }
-  catch(InterruptedException e) {
-      System.out.println(e +" bro idk nah");
-
-  }
+	  try {
+	      draw ();
+	      while (true) {			
+	          erase();
+	          move ();
+	          draw();
+	          sleep (60);			
+	      }
+	  }
+	  catch(InterruptedException e) {
+	      System.out.println(e +" Terdapat error yang tidak diketahui");
+	
+	  }
   }
 
 }
