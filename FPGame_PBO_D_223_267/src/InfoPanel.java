@@ -66,29 +66,13 @@ public class InfoPanel extends JPanel {
 	public void incrementHits () {
 		hits++;
 		level++;
-//		goal.DecreaseSize(15);
-//		goal.IncreaseSpeed(5);
 	}
 
 	public void incrementMisses () {
 		misses++;
 		if(level > 1)
 			level--;
-//		goal.IncreaseSize(2);
-//		goal.DecreaseSpeed(5);
 	}
-//	public void IncreaseSize(Goal goal, int increment) {
-//		goal.IncreaseSize(increment);
-//	}
-//	public void DecreaseSpeed(Goal goal, int decrement) {
-//		goal.DecreaseSpeed(decrement);
-//	}
-//	public void DecreaseSize(Goal goal, int decrement) {
-//		goal.DecreaseSize(decrement);
-//	}
-//	public void IncreaseSpeed(Goal goal, int increment) {
-//		goal.IncreaseSpeed(increment);
-//	}
 
 	public void incrementPoints (int numPoints) {
 		points+= numPoints;

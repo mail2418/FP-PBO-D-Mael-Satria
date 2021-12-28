@@ -2,10 +2,13 @@ import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Line2D;
+
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 public class Football extends Thread{
 
@@ -32,11 +35,10 @@ public class Football extends Thread{
     private Goal goal;
     private boolean hit;
     private boolean kicked;
- 
+    private int deltaSpeedFrame;
+    Image background = new ImageIcon("./Asset/Background2.png").getImage();
     SoundManager soundManager;
-    public Football() {
-    	
-    }
+ 
     public Football(JPanel p,InfoPanel infoPanel,Player player,Goal goal) {
        this.goal = goal;
        this.panel = p;
@@ -44,7 +46,8 @@ public class Football extends Thread{
        this.player = player; 
        this.hit = false;
        this.kicked = false;
-
+       dy = -2;
+       
        Graphics g = panel.getGraphics();
        g2 = (Graphics2D) g;
        backgroundColor = panel.getBackground ();
@@ -55,11 +58,15 @@ public class Football extends Thread{
        x = player.getx();
        y = player.gety() - 10;
        
-       if(infoPanel.getLevel() > 1) {
-    	   dy = -10 -((int)1 * infoPanel.getLevel());
+       if(infoPanel.getLevel() > 0) {
+    	   if(deltaSpeedFrame < 0)
+        	   deltaSpeedFrame = 1;
+    	   else
+    		   deltaSpeedFrame = 4 - infoPanel.getLevel();
        }
-       else
-    	   dy = -10;
+      
+    	   
+   
        
        this.infoPanel.displayInfo();			
     }
@@ -79,6 +86,7 @@ public class Football extends Thread{
  
     public void erase () {			
        Graphics g = panel.getGraphics ();
+//       g.drawImage(background, 0, 0, 800, 800,null);
        g2 = (Graphics2D) g;
  
        g2.setColor (backgroundColor);
@@ -126,7 +134,7 @@ public class Football extends Thread{
 	             erase();
 	             move ();
 	             draw();
-	             sleep (50);			// menambah value untuk menurunkan kecepatan
+	             sleep (deltaSpeedFrame);			// menambah value untuk menurunkan kecepatan
 	         }
 	     }
 	     catch(InterruptedException e) {

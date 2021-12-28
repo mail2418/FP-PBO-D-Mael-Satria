@@ -23,16 +23,13 @@ public class GamePanel extends JPanel {
    SoundManager soundManager;
    
    Image background = new ImageIcon("./Asset/Background2.png").getImage();
+   
    public GamePanel (InfoPanel infoPanel) {
-	setBackground(new Color(50, 135, 55));//Color RGB(0,100,0) dibuat background, setBackground berasal dari warisan JPanel
+	setBackground(new Color(50, 135, 25));//Color RGB(0,100,0) dibuat background, setBackground berasal dari warisan JPanel
 	this.infoPanel = infoPanel;
 	this.soundManager = SoundManager.getInstance();
-   }
-
-//   6. membuat entitas dari kelas player dan juga goal (Ke kelas player)
-   public void createGameEntities() {
-       player = new Player(this, 20, 750);//this pada player mereference ke JPanel
-       goal = new Goal(this,300,10);//this pada goal juga mereference ke JPanel
+    player = new Player(this, 20, 750);//this pada player mereference ke JPanel
+    goal = new Goal(this,300,10,infoPanel);//this pada goal juga mereference ke JPanel
    }
 
    public void kickBall(){
@@ -56,7 +53,7 @@ public class GamePanel extends JPanel {
    public void startGoal(){
       soundManager.playSound("game_intro", false);
       soundManager.playSound("whistle",false);
-      goal = new Goal(this,300,10);
+      goal = new Goal(this,300,10,infoPanel);
       goal.start();
       soundManager.playSound("background",true);
    }
@@ -96,6 +93,5 @@ public class GamePanel extends JPanel {
 
    public void paintComponent (Graphics g) {
       super.paintComponent(g);
-//      g.drawImage(background, 0, 0, 900, 900,null);
    }
 }

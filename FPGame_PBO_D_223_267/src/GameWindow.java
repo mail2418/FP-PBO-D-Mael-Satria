@@ -24,7 +24,7 @@ public class GameWindow extends JFrame implements KeyListener,ActionListener{
 	public GameWindow() {
  
 		setTitle ("Tendangan Si Messi"); //function dari JFrame
-		setSize (850, 1150); //function dari JFrame
+		setSize (800, 1150); //function dari JFrame
 		
 		gameL = new JLabel ("");//JLabel gameL
         started =  false;// boolean Started
@@ -40,9 +40,9 @@ public class GameWindow extends JFrame implements KeyListener,ActionListener{
 //		4. mendeklarasi gamePanel dengan parameternya yaitu infopanel
 		gamePanel = new GamePanel(infoPanel);
 //		5. membuat entitas pada game (Ke kelas gamePanel)
-		gamePanel.createGameEntities();
+//		gamePanel.createGameEntities();
 //		6. membuat besar lapangan (ke kelas gamePanel)
-        gamePanel.setPreferredSize(new Dimension(900, 900)); //Untuk menentukan besar lapangan 
+        gamePanel.setPreferredSize(new Dimension(800, 800)); //Untuk menentukan besar lapangan 
 
 		GridLayout gridLayout;
 //		Menginstantiate JPanel dengan variabel buttonPnael

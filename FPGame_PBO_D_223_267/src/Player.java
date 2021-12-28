@@ -47,9 +47,9 @@ public class Player extends Thread {
 
    public void erase () {
       Graphics g = panel.getGraphics();
+//      g.drawImage(background, 0, 0, 800, 800, null);
       g2 = (Graphics2D) g;
       g2.setColor (backgroundColor);
-//      g.drawImage(background, 0, 0, 800, 800, null);
       g2.fill (new Ellipse2D.Double (x, y, XSIZE, YSIZE));
    }
 
